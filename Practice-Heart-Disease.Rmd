@@ -1,0 +1,85 @@
+---
+title: 'Practice: Heart Disease Mortality 11/20/17'
+author: "Alice Kuan"
+date: "November 24, 2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+
+1. First, loading packages and data set (downloaded as .csv file from https://catalog.data.gov/dataset/heart-disease-mortality-data-among-us-adults-35-by-state-territory-and-county).
+```{r, echo=FALSE}
+library(readr)
+library(pander)
+library(knitr)
+opts_chunk$set(echo=TRUE, prompt=FALSE, message=FALSE, warning=FALSE, comment="", results='hide')
+
+Heart_Disease_Mortality_Data_Among_US_Adults_35_by_State_Territory_and_County <- read.csv("~/RStudio (Projects & Practice)/Practice-Heart-Disease/Heart_Disease_Mortality_Data_Among_US_Adults__35___by_State_Territory_and_County.csv")
+
+#or
+load("~/RStudio (Projects & Practice)/Practice-Heart-Disease/Heart_Disease_Mortality_Data_Among_US_Adults_35_by_State_Territory_and_County")
+
+View(Heart_Disease_Mortality_Data_Among_US_Adults_35_by_State_Territory_and_County)
+
+
+```
+
+
+2. Some basic exploratory data analyses.
+```{r, echo=FALSE}
+
+file <- Heart_Disease_Mortality_Data_Among_US_Adults_35_by_State_Territory_and_County
+names(file)
+head(file)
+tail(file)
+
+file$GeographicLevel
+table(file$LocationAbbr)
+summary(file)
+
+#Don't really know what's going on here
+as.numeric(file$LocationAbbr)
+hist(as.numeric(file$LocationAbbr), xlab="State (by number code)")
+
+#2 Problems:
+##Returns NA bc there's supposed to be an index number in the bracket
+###Wrong column name, it should be LocationsDesc
+file$LocationAbbr["Aleutians East"] 
+
+file$LocationDesc[100]
+file$LocationDesc[seq(1,100, by=5)]
+
+```
+
+
+3. Examining the relationships between heart disease mortality and various factors.
+
+```{r, echo=FALSE}
+
+
+
+```
+
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
